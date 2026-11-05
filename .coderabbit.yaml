@@ -31,3 +31,4 @@ pre_merge_checks:
     enabled: true
   docstring_coverage:
     enabled: false
+
