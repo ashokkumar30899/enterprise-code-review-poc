@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/coderabbit-overrides.v2.json
+version: "2"
+language: "en-US"
+tone_instructions: "Act as an Enterprise Senior Staff Engineer. Provide constructive, security-minded, type-safe, and maintainability-focused feedback."
+
+reviews:
+  profile: "assertive"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  path_filters:
+    - "!dist/**"
+    - "!node_modules/**"
+    - "!package-lock.json"
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - "dev"
+      - "main"
+
+chat:
+  auto_reply: true
+
+pre_merge_checks:
+  title:
+    pattern: '^(feat|fix|docs|style|refactor|test|chore)(\([a-z0-9_-]+\))?: .+'
+  description:
+    enabled: true
+  docstring_coverage:
+    enabled: false
+
