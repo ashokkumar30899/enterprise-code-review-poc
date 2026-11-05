@@ -17,3 +17,4 @@ export const API_CONFIG = {
   // Simulated JWT Signing Secret
   jwtSecretToken: 'super-secret-jwt-signing-key-do-not-expose-9876543210',
 };
+
