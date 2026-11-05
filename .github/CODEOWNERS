@@ -1,0 +1,9 @@
+# CODEOWNERS file for repository ownership
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owners placeholder (replace @TEAM_OR_USERNAME with designated repository owner)
+*       @TEAM_OR_USERNAME
+
+# Core infrastructure & CI/CD workflows
+/.github/ @TEAM_OR_USERNAME
+
