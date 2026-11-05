@@ -1,3 +1,4 @@
+/** Formats a date for display in the local time zone, or returns an empty string if invalid. */
 export function formatDate(isoString: string): string {
   try {
     const date = new Date(isoString);

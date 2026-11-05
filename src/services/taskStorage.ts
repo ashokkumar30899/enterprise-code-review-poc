@@ -42,6 +42,7 @@ const INITIAL_TASKS: Task[] = [
 ];
 
 export const taskStorage = {
+  /** Loads saved tasks, defaulting missing priorities and falling back to the initial tasks. */
   getTasks(): Task[] {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
