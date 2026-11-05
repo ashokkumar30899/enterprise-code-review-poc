@@ -58,3 +58,4 @@ describe('TaskFilter Component', () => {
     expect(onPriorityChange).toHaveBeenCalledWith('high');
   });
 });
+
