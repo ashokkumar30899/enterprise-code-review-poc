@@ -32,6 +32,12 @@ export const TaskItem: React.FC<TaskItemProps> = ({
           </span>
         </label>
         <div className="task-badges">
+          <span
+            className={`badge badge-priority-${task.priority}`}
+            data-testid={`priority-badge-${task.id}`}
+          >
+            {task.priority.toUpperCase()}
+          </span>
           <span className={`badge status-badge ${isCompleted ? 'badge-completed' : 'badge-pending'}`}>
             {isCompleted ? 'Completed' : 'Pending'}
           </span>
@@ -68,4 +74,3 @@ export const TaskItem: React.FC<TaskItemProps> = ({
     </article>
   );
 };
-

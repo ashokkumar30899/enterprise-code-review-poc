@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Task, TaskFilterStatus, TaskFormData } from './types/task';
+import { Task, TaskFilterStatus, TaskFilterPriority, TaskFormData } from './types/task';
 import { taskStorage } from './services/taskStorage';
 import { TaskDashboard } from './components/TaskDashboard';
 import { TaskFilter } from './components/TaskFilter';
@@ -10,6 +10,7 @@ import './App.css';
 export const App: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [statusFilter, setStatusFilter] = useState<TaskFilterStatus>('all');
+  const [priorityFilter, setPriorityFilter] = useState<TaskFilterPriority>('all');
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
   useEffect(() => {
@@ -26,6 +27,7 @@ export const App: React.FC = () => {
               ...t,
               title: data.title,
               description: data.description,
+              priority: data.priority,
               updatedAt: now,
             }
           : t
@@ -39,6 +41,7 @@ export const App: React.FC = () => {
         title: data.title,
         description: data.description,
         status: 'pending',
+        priority: data.priority,
         createdAt: now,
         updatedAt: now,
       };
@@ -74,10 +77,11 @@ export const App: React.FC = () => {
 
   const filteredTasks = useMemo(() => {
     return tasks.filter((t) => {
-      if (statusFilter === 'all') return true;
-      return t.status === statusFilter;
+      const matchesStatus = statusFilter === 'all' || t.status === statusFilter;
+      const matchesPriority = priorityFilter === 'all' || t.priority === priorityFilter;
+      return matchesStatus && matchesPriority;
     });
-  }, [tasks, statusFilter]);
+  }, [tasks, statusFilter, priorityFilter]);
 
   return (
     <div className="app-container">
@@ -105,7 +109,9 @@ export const App: React.FC = () => {
               <h2>Tasks ({filteredTasks.length})</h2>
               <TaskFilter
                 statusFilter={statusFilter}
+                priorityFilter={priorityFilter}
                 onStatusChange={setStatusFilter}
+                onPriorityChange={setPriorityFilter}
               />
             </div>
 
@@ -127,4 +133,3 @@ export const App: React.FC = () => {
 };
 
 export default App;
-

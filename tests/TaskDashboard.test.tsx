@@ -10,6 +10,7 @@ describe('TaskDashboard Component', () => {
       title: 'Task 1',
       description: 'Desc 1',
       status: 'completed',
+      priority: 'high',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     },
@@ -18,6 +19,7 @@ describe('TaskDashboard Component', () => {
       title: 'Task 2',
       description: 'Desc 2',
       status: 'pending',
+      priority: 'medium',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     },
@@ -26,6 +28,7 @@ describe('TaskDashboard Component', () => {
       title: 'Task 3',
       description: 'Desc 3',
       status: 'pending',
+      priority: 'low',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     },
@@ -49,4 +52,3 @@ describe('TaskDashboard Component', () => {
     expect(screen.getByTestId('completion-rate')).toHaveTextContent('0%');
   });
 });
-

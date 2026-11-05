@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Task, TaskFormData } from '../types/task';
+import { Task, TaskFormData, TaskPriority } from '../types/task';
 
 interface TaskFormProps {
   onSubmit: (data: TaskFormData) => void;
@@ -14,16 +14,19 @@ export const TaskForm: React.FC<TaskFormProps> = ({
 }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [priority, setPriority] = useState<TaskPriority>('medium');
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (editingTask) {
       setTitle(editingTask.title);
       setDescription(editingTask.description);
+      setPriority(editingTask.priority);
       setError(null);
     } else {
       setTitle('');
       setDescription('');
+      setPriority('medium');
       setError(null);
     }
   }, [editingTask]);
@@ -37,10 +40,12 @@ export const TaskForm: React.FC<TaskFormProps> = ({
     onSubmit({
       title: title.trim(),
       description: description.trim(),
+      priority,
     });
     if (!editingTask) {
       setTitle('');
       setDescription('');
+      setPriority('medium');
     }
     setError(null);
   };
@@ -60,6 +65,20 @@ export const TaskForm: React.FC<TaskFormProps> = ({
           placeholder="e.g. Conduct security vulnerability assessment"
           required
         />
+      </div>
+
+      <div className="form-field">
+        <label htmlFor="task-priority">Priority *</label>
+        <select
+          id="task-priority"
+          value={priority}
+          onChange={(e) => setPriority(e.target.value as TaskPriority)}
+          aria-label="Select Task Priority"
+        >
+          <option value="low">Low Priority</option>
+          <option value="medium">Medium Priority</option>
+          <option value="high">High Priority</option>
+        </select>
       </div>
 
       <div className="form-field">
@@ -90,4 +109,3 @@ export const TaskForm: React.FC<TaskFormProps> = ({
     </form>
   );
 };
-
